@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Estudiantes",
+    "redirect": "/dashboard/students",
+    "icon": "school"
+  },
+  {
+    "name": "Cursos",
+    "redirect": "/dashboard/courses",
+    "icon": "list"
+  },
+  {
+    "name": "Inscriptos",
+    "redirect": "/dashboard/inscriptions",
+    "icon": "checklist"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "email": "m@gmail.com",
+    "name": "Martin",
+    "lasname": "Perez",
+    "sex": "M"
+  },
+  {
+    "email": "pai@gmail.com",
+    "name": "Paula",
+    "lasname": "Martinez",
+    "sex": "F"
+  },
+  {
+    "email": "rami@gmail.com",
+    "name": "Ramiro",
+    "lasname": "Cabo",
+    "sex": "M"
+  },
+  {
+    "email": "santi@gmail.com",
+    "name": "Santiago",
+    "lasname": "Ramirez",
+    "sex": "M"
+  },
+  {
+    "email": "pau@gmail.com",
+    "name": "Paula",
+    "lasname": "Santos",
+    "sex": "F"
+  },
+  {
+    "email": "cami@gmail.com",
+    "name": "Camila",
+    "lasname": "Gonzales",
+    "sex": "F"
+  },
+  {
+    "email": "carla@gmail.com",
+    "name": "Carla",
+    "lasname": "Jimenez",
+    "sex": "F"
+  },
+  {
+    "email": "wildcard@gmail.com",
+    "name": "Wiliam",
+    "lasname": "Colavini",
+    "sex": "M"
+  },
+  {
+    "email": "dant@gmail.com",
+    "name": "Dante",
+    "lasname": "Alvarez",
+    "sex": "M"
+  },
+  {
+    "email": "fedeb@gmail.com",
+    "name": "Federico",
+    "lasname": "Bustos",
+    "sex": "M"
+  }
+]
