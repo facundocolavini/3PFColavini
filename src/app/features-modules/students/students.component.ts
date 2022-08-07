@@ -17,41 +17,48 @@ export class StudentsComponent implements OnInit {
 
    public listStudents: StudentI[] = [];
   displayedColumns: string[] = ['email', 'name', 'lastname', 'sex','actions'];
-  dataSource!: MatTableDataSource<any>
+  dataSource :any
   public studentId: string | null = null;
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+
 
   constructor(
     private studentsService: StudentsService,
     public activedRoute: ActivatedRoute,
     private snackbar: MatSnackBar) { }
 
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+    @ViewChild(MatSort) sort!:MatSort;
 
-  ngOnInit(): void {
-    this.loadStudents()
+  ngOnInit() {
+    this.studentsService.getAllStudents().subscribe((res) => {
+      console.log(res)
+      this.listStudents = res
+      this.dataSource = new MatTableDataSource(res)
+
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
     this.activedRoute.paramMap.subscribe((param) => {
       this.studentId = param.get('idStudent'); 
     });
+    
     /* console.log(this.studentId) */
   }
 
   loadStudents(){
     this.studentsService.getAllStudents().subscribe((res) => {
       console.log(res)
-
+      this.listStudents = res
       this.dataSource = new MatTableDataSource(res)
 
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
 
    /*  this.dataSource = new MatTableDataSource(this.listStudents) */
   }
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
 
   applyFilter(event: Event) {

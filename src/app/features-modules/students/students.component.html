@@ -9,7 +9,7 @@
 
         </button>
     </mat-toolbar>
-    <div *ngIf="dataSource.data.length > 0">
+    <div *ngIf="listStudents.length > 0">
         <!-- Filters -->
         <mat-form-field appearance="standard">
             <mat-label>Buscar</mat-label>
@@ -88,5 +88,5 @@
             </mat-paginator>
         </div>
     </div>
-    <!-- <h2 class="text-mt" *ngIf="listStudents.length === 0">No hay estudiantes...</h2> -->
+    <h2 class="text-mt" *ngIf="listStudents.length === 0">No hay estudiantes...</h2>
 </div>
