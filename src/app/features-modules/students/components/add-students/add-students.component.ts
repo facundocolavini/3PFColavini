@@ -27,6 +27,7 @@ export class AddStudentsComponent implements OnInit {
   }
   addStudent(){
       const student: Student= {
+        id: this.form.value.id + 1,
         email: this.form.value.email,
         name: this.form.value.name,
         lastname: this.form.value.lastname,

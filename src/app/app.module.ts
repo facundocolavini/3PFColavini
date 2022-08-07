@@ -20,7 +20,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

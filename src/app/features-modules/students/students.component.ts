@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 import { Student } from 'src/app/interfaces/student';
 import { StudentsService } from 'src/app/services/students.service';
 
@@ -17,15 +18,19 @@ export class StudentsComponent implements OnInit {
   listStudents: Student[] = [];
   displayedColumns: string[] = ['email', 'name', 'lastname', 'sex','actions'];
   dataSource!:  MatTableDataSource<any>;
-
+  public studentId: string | null = null;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private studentsService: StudentsService,private snackbar: MatSnackBar) { }
+  constructor(private studentsService: StudentsService,public activedRoute: ActivatedRoute,private snackbar: MatSnackBar) { }
 
 
   ngOnInit(): void {
     this.loadStudents()
+    this.activedRoute.paramMap.subscribe((param) => {
+      this.studentId = param.get('idStudent'); 
+    });
+    console.log(this.studentId)
   }
 
   loadStudents(){
@@ -45,7 +50,6 @@ export class StudentsComponent implements OnInit {
   }
 
   deleteStudent(index:number){
-    console.log(index)
     this.studentsService.deleteStudent(index);
     this.loadStudents();
 
@@ -56,5 +60,11 @@ export class StudentsComponent implements OnInit {
       
     })
   }
+
+/*       //GET Student
+      public getStudentById(studentId: string): Observable<Students>{
+        let dataUrl = `${this.serverUrl}/students/${studentId}`;
+        return this.httpClient.get<Students>(dataUrl).pipe(catchError(this.handleError))
+    } */
 
 }

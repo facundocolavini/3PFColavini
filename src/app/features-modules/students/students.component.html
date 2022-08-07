@@ -2,7 +2,7 @@
     <mat-toolbar>
         <span>Estudiantes</span>
         <div class="toolbar-spacer"></div>
-        <button  matTooltip="Agregar estudiante" routerLink="/dashboard/create" mat-raised-button color="primary">Agregar
+        <button  matTooltip="Agregar estudiante" routerLink="/dashboard/students/create" mat-raised-button color="primary">Agregar
             <mat-icon>
                 add
             </mat-icon>
@@ -45,12 +45,13 @@
                 <ng-container matColumnDef="actions">
                     <th mat-header-cell *matHeaderCellDef style="text-align: right;">  </th>
                     <td mat-cell *matCellDef="let element; let i = index" style="text-align: right;">
-                        <a 
+                        <a      
                             matTooltip="Detalle del estudiante"
                             class="pointer" 
                             style="color: #1878b0;"
-                        >
-                            <mat-icon>
+                            routerLink="/dashboard/students/details"
+                        >  
+                            <mat-icon  >
                                 search
                             </mat-icon>
                         </a>
@@ -58,6 +59,7 @@
                             class="pointer" 
                             style="color: #18b069;"
                             matTooltip="Editar estudiante" 
+                            routerLink="/dashboard/students/edit/:idStudent"
                         >
                             <mat-icon>
                                 edit

@@ -6,29 +6,29 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { StudentsComponent } from './components/students/students.component';
 import { CoursesComponent } from './components/courses/courses.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FormsModule } from '@angular/forms';
 import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
-import { AddStudentsComponent } from './components/add-students/add-students.component';
+import { StudentsModule } from 'src/app/features-modules/students/students.module';
+import { StudentsComponent } from 'src/app/features-modules/students/students.component';
+
 
 @NgModule({
   declarations: [
     DashboardComponent,
     HomeComponent,
-    NavbarComponent,
+    NavbarComponent,   
     StudentsComponent,
     CoursesComponent,
     SidenavComponent,
     InscriptionsComponent,
-    AddStudentsComponent,
-
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
     SharedModule,
+    StudentsModule,
     FormsModule
   ]
 })

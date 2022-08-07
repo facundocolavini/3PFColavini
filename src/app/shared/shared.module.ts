@@ -21,6 +21,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -42,7 +44,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatListModule
     
   ],
   exports: [   
@@ -62,7 +66,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDividerModule,
+    MatListModule
   ]
 })
 export class SharedModule { }
