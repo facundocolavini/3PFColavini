@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Student } from '../interfaces/student';
+import { map} from 'rxjs/operators';
+import { StudentI } from '../interfaces/student';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+
+
+export interface StudentID extends StudentI { id: string;}
 
 @Injectable({
   providedIn: 'root'
 })
 export class StudentsService {
-  
-  listStudents:Student[]=[
+
+  private studentCollection: AngularFirestoreCollection<StudentI>;
+  public students: Observable<StudentID[]>
+ /*  listStudents:Student[]=[
     {
       id:'1',
       email: "m@gmail.com",
@@ -78,18 +85,28 @@ export class StudentsService {
       lastname: "Bustos",
       sex: "M"
     }
-  ]
+  ] */
 
-  constructor() { }
+  constructor(private readonly afs:AngularFirestore) {
+    this.studentCollection = afs.collection<StudentI>('students');
+    this.students = this.studentCollection.snapshotChanges().pipe(
+      map(action => action.map((a => {
+        const data = a.payload.doc.data() as StudentI;
+        const id =  a.payload.doc.id;
+        return { id, ...data}
+      })
+      )))
+   }
 
-  getStudents(){
-    return this.listStudents.slice() // Copia del listado de students
+  getAllStudents(){
+    return this.students;
+
   }
 
   deleteStudent(index: number){
-    this.listStudents.splice(index,1) // splice(Desde,Cuantos)
+    //this.listStudents.splice(index,1) // splice(Desde,Cuantos)
   }
-  addStudent(student: Student){
-    this.listStudents.unshift(student)
+  addStudent(student: StudentI){
+    //this.listStudents.unshift(student)
   }
 }

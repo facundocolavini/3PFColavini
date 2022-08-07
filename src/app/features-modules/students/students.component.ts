@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { Student } from 'src/app/interfaces/student';
+import { StudentI } from 'src/app/interfaces/student';
 import { StudentsService } from 'src/app/services/students.service';
 
 
@@ -15,14 +15,18 @@ import { StudentsService } from 'src/app/services/students.service';
 })
 export class StudentsComponent implements OnInit {
 
-  listStudents: Student[] = [];
+   public listStudents: StudentI[] = [];
   displayedColumns: string[] = ['email', 'name', 'lastname', 'sex','actions'];
-  dataSource!:  MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<any>
   public studentId: string | null = null;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private studentsService: StudentsService,public activedRoute: ActivatedRoute,private snackbar: MatSnackBar) { }
+  constructor(
+    private studentsService: StudentsService,
+    public activedRoute: ActivatedRoute,
+    private snackbar: MatSnackBar) { }
 
 
   ngOnInit(): void {
@@ -30,12 +34,18 @@ export class StudentsComponent implements OnInit {
     this.activedRoute.paramMap.subscribe((param) => {
       this.studentId = param.get('idStudent'); 
     });
-    console.log(this.studentId)
+    /* console.log(this.studentId) */
   }
 
   loadStudents(){
-    this.listStudents = this.studentsService.getStudents();
-    this.dataSource = new MatTableDataSource(this.listStudents)
+    this.studentsService.getAllStudents().subscribe((res) => {
+      console.log(res)
+
+      this.dataSource = new MatTableDataSource(res)
+
+    })
+
+   /*  this.dataSource = new MatTableDataSource(this.listStudents) */
   }
 
   ngAfterViewInit() {

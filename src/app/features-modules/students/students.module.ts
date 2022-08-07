@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { StudentsRoutingModule } from './students-routing.module';
 import { EditStudentComponent } from './components/edit-student/edit-student.component';
 import { DetailsStudentComponent } from './components/details-student/details-student.component';
+import { StudentsService } from 'src/app/services/students.service';
 
 
 
@@ -16,6 +17,6 @@ import { DetailsStudentComponent } from './components/details-student/details-st
     SharedModule,
     FormsModule,
     StudentsRoutingModule
-  ]
+  ],providers: [StudentsService]
 })
 export class StudentsModule { }

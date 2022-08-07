@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Student } from 'src/app/interfaces/student';
+import { StudentI } from 'src/app/interfaces/student';
 import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
@@ -26,8 +26,7 @@ export class AddStudentsComponent implements OnInit {
   ngOnInit(): void {
   }
   addStudent(){
-      const student: Student= {
-        id: this.form.value.id + 1,
+      const student: StudentI= {
         email: this.form.value.email,
         name: this.form.value.name,
         lastname: this.form.value.lastname,

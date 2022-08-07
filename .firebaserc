@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gestor-de-cursos": {
+      "hosting": {
+        "2PFCOLAVINI": [
+          "gestor-de-cursos"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gestor-de-cursos"
+  }
+}
