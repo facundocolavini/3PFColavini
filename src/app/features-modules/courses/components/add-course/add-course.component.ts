@@ -31,7 +31,7 @@ export class AddCourseComponent implements OnInit {
    
   }
   openSuccessSnackBar(){
-    this.snackbar.open("Estudiante agregado con exito", "OK", {
+    this.snackbar.open("Curso agregado con exito", "OK", {
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom',
@@ -41,7 +41,7 @@ export class AddCourseComponent implements OnInit {
 
 
   openFailureSnackBar(){
-    this.snackbar.open("No se pudo realizar la operacion", "reintentelo", {
+    this.snackbar.open("No se pudo realizar la operacion", "desaparecer", {
       duration: 3000,
       panelClass: ['red-snackbar','error-snackbar'],
       horizontalPosition: 'right',
