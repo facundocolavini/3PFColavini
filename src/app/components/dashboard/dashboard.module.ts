@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { StudentsModule } from 'src/app/features-modules/students/students.module';
+import { CoursesModule } from 'src/app/features-modules/courses/courses.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
+
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { CoursesComponent } from './components/courses/courses.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FormsModule } from '@angular/forms';
 import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
-import { StudentsModule } from 'src/app/features-modules/students/students.module';
 import { StudentsComponent } from 'src/app/features-modules/students/students.component';
+import { CoursesComponent } from 'src/app/features-modules/courses/courses.component';
+
+
 
 
 @NgModule({
@@ -29,6 +33,7 @@ import { StudentsComponent } from 'src/app/features-modules/students/students.co
     DashboardRoutingModule,
     SharedModule,
     StudentsModule,
+    CoursesModule,
     FormsModule
   ]
 })
