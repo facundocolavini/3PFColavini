@@ -9,8 +9,8 @@ const routes: Routes = [
   {path: '',
   component:StudentsComponent},
   {path:'create', component: AddStudentsComponent},
-  {path:'edit/:idStudent', component: EditStudentComponent},
-  {path:'details', component: DetailsStudentComponent}
+  {path:'edit/:id', component: EditStudentComponent},
+  {path:'details/student/:id', component: DetailsStudentComponent}
   
 ];
 

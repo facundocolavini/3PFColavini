@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
   selector: 'app-details-student',
@@ -8,14 +10,30 @@ import { Router } from '@angular/router';
 })
 export class DetailsStudentComponent implements OnInit {
   sex: any[] = ['Masculino','Femenino'];
-  constructor(private router :Router) { }
+  public student: any
+  public studentIdParams: any 
 
-  ngOnInit(): void {
+  constructor(
+    private router :Router,
+    private studentService: StudentsService,
+    public activedRoute: ActivatedRoute,
+    private snackbar: MatSnackBar) { }
+
+  ngOnInit() {
+    this.activedRoute.paramMap.subscribe((param) => {
+      this.studentIdParams = param.get('id'); 
+     });
+  
+    this.studentService.getStudentById(this.studentIdParams).subscribe(data => {
+      if(this.studentIdParams){
+        this.student = data;
+      }
+    
+         
+      })
+
   }
   backBtn(){
-
-
     this.router.navigate(['/dashboard/students'])
-    
-}
+  }
 }
