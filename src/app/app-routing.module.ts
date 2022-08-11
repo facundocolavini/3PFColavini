@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './public/not-found/not-found.component';
+
+
 
 const routes: Routes = [
-  {path: '', redirectTo:'login', pathMatch:'full'},
-  {path: 'login', component: LoginComponent},
+  {path: '', redirectTo:'register', pathMatch:'full'},
+  {path: 'register', loadChildren: ()=> import('../app/auth/auth.module').then(m => m.AuthModule)},
   {path: 'notfound', component: NotFoundComponent},
-  {path: 'dashboard', loadChildren: ()=> import('./components/dashboard/dashboard.module').then(m => m.DashboardModule)}, // Lazy loading
+  {path: 'dashboard', loadChildren: ()=> import('./features-modules/dashboard/dashboard.module').then(m => m.DashboardModule)}, // Lazy loading
   {path: '**', redirectTo:'notfound', pathMatch:'full' }
 ];
 

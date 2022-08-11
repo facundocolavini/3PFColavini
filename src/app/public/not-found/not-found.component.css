@@ -1,0 +1,24 @@
+.center{
+    display:flex;
+
+    flex-direction: column;
+    justify-content: center;
+   
+    align-items: center;
+    height: 100%;
+    background-color:whitesmoke;
+}
+
+.title-notFound{
+    width: 100%;
+}
+.box-notFound{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    max-width: 330px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}

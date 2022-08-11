@@ -1,4 +1,4 @@
-.login-body{
+.singup-body{
     display:flex;
     justify-content: center;
     align-items: center;
@@ -6,20 +6,22 @@
     background-color:whitesmoke;
 }
 
-.login-box{
+.singup-box{
     width: 100%;
     max-width: 330px;
     text-align: center;
 }
 
-.login-image-user{
+.singup-image-user{
     width: 50%;
 }
 
-.login-custom-w{
+.singup-custom-w{
     width: 100%;
 }
 
-.btn-login{
+.btn-singup{
+    background:slateblue;
+    color: white;
     height: 50px;
 }

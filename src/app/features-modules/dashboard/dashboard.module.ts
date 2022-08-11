@@ -7,13 +7,16 @@ import { CoursesModule } from 'src/app/features-modules/courses/courses.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import { DashboardComponent } from './dashboard.component';
-import { HomeComponent } from './components/home/home.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
+
+
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { FormsModule } from '@angular/forms';
-import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
+
 import { StudentsComponent } from 'src/app/features-modules/students/students.component';
 import { CoursesComponent } from 'src/app/features-modules/courses/courses.component';
+import { NavbarComponent } from 'src/app/public/navbar/navbar.component';
+import { InscriptionsComponent } from 'src/app/features-modules/inscriptions/inscriptions.component';
+import { HomeComponent } from 'src/app/public/home/home.component';
 
 
 

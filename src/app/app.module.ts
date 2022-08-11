@@ -10,16 +10,16 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 // Components
-import { LoginComponent } from './components/login/login.component';
+
 import { SharedModule } from './shared/shared.module';
-import { NotFoundComponent } from './components/not-found/not-found.component';
+import { NotFoundComponent } from './public/not-found/not-found.component';
+
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     NotFoundComponent
   ],
   imports: [
@@ -29,7 +29,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
-  
   ],
   providers: [],
   bootstrap: [AppComponent]

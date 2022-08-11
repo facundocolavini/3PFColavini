@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { InscriptionsComponent } from 'src/app/features-modules/inscriptions/inscriptions.component';
+import { HomeComponent } from 'src/app/public/home/home.component';
 
-import { HomeComponent } from './components/home/home.component';
-import { InscriptionsComponent } from './components/inscriptions/inscriptions.component';
+
+
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
