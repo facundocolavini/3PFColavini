@@ -5,17 +5,17 @@
         <div class="singup-box">
             <img class="singup-image-user" src="./assets/img/user.png" alt="user image singup">
             <h1>Regristrate</h1>
-            <mat-form-field  class="singup-custom-w" appearance="fill" >
+            <!-- <mat-form-field  class="singup-custom-w" appearance="fill" >
                 <mat-label>Nombre</mat-label>
                 <input type="text" matInput formControlName="userName">
+            </mat-form-field> -->
+            <mat-form-field  class="singup-custom-w" appearance="fill" >
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="userEmail">
             </mat-form-field>
             <mat-form-field  class="singup-custom-w" appearance="fill" >
                 <mat-label>Contraseña</mat-label>
                 <input type="password" matInput formControlName="userPassword">
-            </mat-form-field>
-            <mat-form-field  class="singup-custom-w" appearance="fill" >
-                <mat-label>Email</mat-label>
-                <input type="email" matInput formControlName="userEmail">
             </mat-form-field>
             <button type="submit" class="singup-custom-w btn-singup" mat-raised-button color="primary" [disabled]="singUpForm.invalid">Registrarse</button>
         </div>

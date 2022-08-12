@@ -7,7 +7,7 @@ import { environment } from '../environments/environment';
 
 // Module 
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFirestoreDocument, AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 // Components
 

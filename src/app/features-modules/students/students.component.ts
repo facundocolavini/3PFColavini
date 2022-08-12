@@ -9,7 +9,7 @@ import { StudentsService } from 'src/app/services/students.service';
 
 
 @Component({
-  selector: 'app-students_DATA',
+  selector: 'app-students',
   templateUrl: './students.component.html',
   styleUrls: ['./students.component.css']
 })
@@ -35,7 +35,7 @@ export class StudentsComponent implements OnInit {
   ngOnInit(){
     this._studentsService.getAllStudents().subscribe(students => {
       this.listStudents = students;
-      this.dataSource = new MatTableDataSource(students)
+      this.dataSource = new MatTableDataSource(this.listStudents)
       this.paginator = this.dataSource.paginator;
       this.sort = this.dataSource.sort
     } )

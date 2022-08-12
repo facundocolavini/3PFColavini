@@ -4,4 +4,5 @@ export interface InscriptionI {
     lastname: string;
     course: string;
     registrationDate: Date;     
+    studentId?: string;
 }
