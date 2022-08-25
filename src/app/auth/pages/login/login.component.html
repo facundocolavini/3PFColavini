@@ -12,8 +12,13 @@
             <mat-form-field  class="login-custom-w" appearance="fill" >
                 <mat-label>Contraseña</mat-label>
                 <input type="password" matInput formControlName="userPassword">
+         
             </mat-form-field>
-            <button type="button" [disabled]="loginForm.valid" routerLink="/register/singup" class="singup-custom-w btn-singup" mat-raised-button>Registrate</button>
+           <!--  <span *ngIf="firebaseErrorMessage !== ''">{{firebaseErrorMessage}}</span> -->
+            <div class="register-box">
+                <span>Ya te registraste? <a routerLink="/register/singup">Registrate!</a></span>
+            </div>
+
 
             <button type="submit" class="login-custom-w btn-login" mat-raised-button color="primary" [disabled]="loginForm.invalid">Iniciar sesión</button>
         </div>

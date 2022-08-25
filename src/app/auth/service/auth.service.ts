@@ -1,73 +1,125 @@
-
 import { Injectable } from '@angular/core';
-
-import { map } from 'rxjs/operators';
-
-
-
-import { UserI } from '../../interfaces/user';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  newUser: any;
+  public userLoggedIn: boolean ;
+  public currentUser: any;
+  public userStatus:any = {} ;
+  public userStatusChanges: BehaviorSubject<any> = new BehaviorSubject(this.userStatus);
+  public role: any;
 
-  constructor(private afsAuth: AngularFireAuth, private afs: AngularFirestore) { }
-
-  registerUser(email: string, pass: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.afsAuth.createUserWithEmailAndPassword(email, pass)
-        .then(userData => {
-          resolve(userData),
-            this.updateUserData(userData.user)
-        }).catch(err => console.log(reject(err)))
-    });
+  setUserStatus(userStatus: any):void{
+    this.userStatus = userStatus;
+    this.userStatusChanges.next(this.userStatus);
   }
 
-  loginEmailUser(email: string, pass: string) {
-    return new Promise((resolve, reject) => {
-      this.afsAuth.signInWithEmailAndPassword(email, pass)
-        .then(userData => resolve(userData),
-        err => reject(err));
-    });
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFirestore,
+    private snackbar: MatSnackBar,
+    private router: Router
+  ) {
+    this.userLoggedIn = false;
+    this.afAuth.onAuthStateChanged((user)=>{
+        if(user){
+          this.userLoggedIn = true;  
+        }else{
+          this.userLoggedIn = false;
+        }
+    })
+   }
+
+  getUserState(){
+    return  this.afAuth.authState
   }
 
-/*   loginFacebookUser() {
-    return this.afsAuth.signInWithPopup(new this.)
-      .then(credential => this.updateUserData(credential.user))
+  singup(user: any): Promise<any>{
+    console.log(user,'SINGUP')
+    return this.afAuth.createUserWithEmailAndPassword(user.userEmail, user.userPassword)
+      .then((result)=>{
+        this.userCreatedSuccesfull()
+        result.user?.updateProfile({
+          displayName: user.userName + user.userLastName ,
+        })
+        result.user?.sendEmailVerification();
+      })
+      .catch(error => {
+        console.log('Error: ' + error)
+        console.log('Error code: ' + error.code)
+        return { isValid: false, message: error.message}
+      }); 
   }
 
-  loginGoogleUser() {
-    return this.afsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
-      .then(credential => this.updateUserData(credential.user))
-  } */
-
-  logoutUser() {
-    return this.afsAuth.signOut();
-  }
-
-  isAuth() {
-    return this.afsAuth.authState.pipe(map(auth => auth));
-  }
-
-  private updateUserData(user : any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.id}`);
-    const data: UserI = {
-      id: user.id,
-      email: user.email,
-      roles: {
-        user: true
-      }
-    }
-    return userRef.set(data, { merge: true })
-  }
-
-
-  isUserAdmin(userUid : any) {
-    return this.afs.doc<UserI>(`users/${userUid}`).valueChanges();
+  login(email:string, password:string){
+    return this.afAuth.signInWithEmailAndPassword(email, password)
+    .then((result)=>{
+      this.userLogedSuccesfull();
+      this.router.navigate(['/dashboard']);
+    })
+    .catch(error => {
+      console.log('Error: ' + error)
+      console.log('Error code: ' + error.code)
+      return { isValid: false, message: error.message}
+    }); 
   }
 
 
+
+  userInvalidCredentials(){
+    this.snackbar.open('Los campos ingresados no son validos','', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      panelClass: ['red-snackbar','error-snackbar'],
+      verticalPosition: 'bottom',
+    })
+  }
+
+
+  userCreatedSuccesfull(){
+    this.snackbar.open('Registro completado con exito','OK', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      panelClass: ['green-snackbar', 'add-snackbar'],
+      verticalPosition: 'bottom',
+    })
+  }
+  
+  userExistSnackbar(){
+    this.snackbar.open('El usuario ya existe','', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      panelClass: ['red-snackbar','error-snackbar'],
+      verticalPosition: 'bottom',
+    })
+  }
+
+
+  
+  inserUserData(userCredential: any){
+    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+      email: this.newUser.userEmail,
+      firstname: this.newUser.userName,
+      lastname: this.newUser.userLastName,
+      role: {user:true}
+    })
+  }
+
+  getRoles(userCredential: any){
+    this.db.doc(`Users/${userCredential.user.uid}`).get()
+  }
+
+  logout(){
+    this.userStatus = ''
+    this.currentUser = null;
+    this.setUserStatus(null)
+    return this.afAuth.signOut()
+  }
 }

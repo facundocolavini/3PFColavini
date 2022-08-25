@@ -2,6 +2,7 @@
     <button mat-button routerLink="/dashboard">Dashboard</button>
    
     <span class="nav-spacer"></span>
+    <span> {{user?.displayName}}</span>
     <button (click)="logOutUser()" mat-icon-button routerLink="/register/login" >
         <span class="material-icons">
             logout

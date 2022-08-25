@@ -5,14 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment';
 
-// Module 
+// Firebase Modules
 import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFirestoreDocument, AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 // Components
 
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './public/not-found/not-found.component';
+
 
 
 
@@ -28,7 +30,8 @@ import { NotFoundComponent } from './public/not-found/not-found.component';
     BrowserAnimationsModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]

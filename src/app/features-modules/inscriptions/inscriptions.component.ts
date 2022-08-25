@@ -30,14 +30,14 @@ export class InscriptionsComponent implements OnInit {
   }
 
   getCurrentUser(){
-    this.authService.isAuth().subscribe(auth => {
+   /*  this.authService.isAuth().subscribe(auth => {
       if(auth){
         this.userId = auth.uid;
         this.authService.isUserAdmin(this.userId).subscribe(userRole => {
           this.isAdmin = Object.assign({}, userRole).hasOwnProperty('admin');
         })
       }
-    }) 
+    })  */
   }
   onDeleteInscriptions(idInscription: string): void {
     const confirmation = confirm('Seguro que quiere realizar esta accion?');

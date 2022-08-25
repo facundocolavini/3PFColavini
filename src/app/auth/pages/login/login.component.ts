@@ -14,13 +14,15 @@ import { AuthService } from '../../service/auth.service';
 export class LoginComponent implements OnInit {
   public loginForm: FormGroup 
   public loading: boolean = false;
-
+  public firebaseErrorMessage: string ;
+  
   constructor(
     private fb: FormBuilder,
     private snackbar: MatSnackBar,
     private router: Router,
     private authService: AuthService,
      ) {
+    this.firebaseErrorMessage = '';
     this.loginForm = this.fb.group({
       userEmail: ['', Validators.required],
       userPassword: ['', Validators.required],
@@ -32,36 +34,45 @@ export class LoginComponent implements OnInit {
 
   submitLoginForm(){
     const { userEmail, userPassword } = this.loginForm.value
+    this.loading = true;
     if(this.loginForm.valid){
-      this.authService.loginEmailUser(userEmail, userPassword).then(()=>{
-        this.showLoading()
+      this.loading = false;
+      this.authService.login(userEmail, userPassword).then((response) =>{
+        console.log(response,'response');
+        
+      if(response?.message == undefined){
         this.userLogedSuccesfull()
-      }).catch(()=>{
-        this.userNotExist()
-        this.loginForm.reset()
-      })
-    }else{
-      this.showSnackbar()
-      this.loginForm.reset()
-    }
-   
-/*     console.log(userEmail, userPassword)
-    if (userEmail === 'facu' &&  userPassword === '123'){
-      this.showLoading()
+        this.loading = false;
+      }else{
+        this.loading = false;
+        this.firebaseErrorMessage = response?.message.replace('Firebase:', '').split('.')[0]
+        this.userInvalid(this.firebaseErrorMessage)  
+      }
 
-    }else{
-      this.showSnackbar()
-      this.loginForm.reset()
-    } */
+      })
+
+    }
+    
   }
-  userLogedSuccesfull(){
-    this.snackbar.open('Se logeo con exito','desaparecer', {
+
+  userInvalid(message: string){
+    this.snackbar.open(message,'desaparecer', {
       duration: 3000,
       horizontalPosition: 'right',
+      panelClass: ['red-snackbar','error-snackbar'],
       verticalPosition: 'bottom',
-      
     })
   }
+
+  userLogedSuccesfull(){
+    this.snackbar.open('Se logeo con exito','', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      panelClass: ['green-snackbar', 'add-snackbar'],
+      verticalPosition: 'bottom',
+    })
+  }
+  
   userNotExist(){
     this.snackbar.open('El Usuario no existe','desaparecer', {
       duration: 3000,
