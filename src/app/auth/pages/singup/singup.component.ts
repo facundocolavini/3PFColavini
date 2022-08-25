@@ -33,8 +33,6 @@ export class SingupComponent implements OnInit {
   }
   
   ngOnInit(): void {
-
-    
   }
 
   registerUser(){
@@ -45,15 +43,14 @@ export class SingupComponent implements OnInit {
     this.authService.singup(this.singUpForm.value)
       .then((result)=>{
         if(result == null){
+          this.showLoading();
           this.userCreatedSuccesfull()
             this.router.navigate(['/register/login']);
-        }else if(result.isValid == false){
+        }else if(result.message){
           this.firebaseErrorMessage =  result.message.replace('Firebase:', '').split('(')[0]
           this.userInValid(this.firebaseErrorMessage)
         }
-      }).catch(() => {
-        
-      });
+      })
   }
 
   userInValid(message: string){
@@ -65,6 +62,7 @@ export class SingupComponent implements OnInit {
     })
 
   }
+  
   userCreatedSuccesfull(){
     this.snackbar.open('Registro completado con exito','OK', {
       duration: 3000,
@@ -73,7 +71,6 @@ export class SingupComponent implements OnInit {
       verticalPosition: 'bottom',
     })
   }
-
 
   showSnackbar(){
     this.snackbar.open('Los datos no son correctos','', {
@@ -84,9 +81,9 @@ export class SingupComponent implements OnInit {
   }
 
   showLoading(){
-    this.loading =true;
+    this.loading =false;
     setTimeout(() => {
-      this.router.navigate(['/dashboard']);
-    }, 3000);
+      this.loading =true;
+    }, 1500);
   }
 }

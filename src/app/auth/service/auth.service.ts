@@ -24,7 +24,6 @@ export class AuthService {
   constructor(
     private afAuth: AngularFireAuth,
     private db: AngularFirestore,
-    private snackbar: MatSnackBar,
     private router: Router
   ) {
     this.userLoggedIn = false;
@@ -48,6 +47,7 @@ export class AuthService {
         result.user?.updateProfile({
           displayName: user.userName + ' ' + user.userLastName ,
         })
+        /* this.inserUserData(result) */
         result.user?.sendEmailVerification();
       })
       .catch(error => {
@@ -69,28 +69,6 @@ export class AuthService {
     }); 
   }
 
-
-
-  userInvalidCredentials(){
-    this.snackbar.open('Los campos ingresados no son validos','', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      panelClass: ['red-snackbar','error-snackbar'],
-      verticalPosition: 'bottom',
-    })
-  }
-
-  userExistSnackbar(){
-    this.snackbar.open('El usuario ya existe','', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      panelClass: ['red-snackbar','error-snackbar'],
-      verticalPosition: 'bottom',
-    })
-  }
-
-
-  
   inserUserData(userCredential: any){
     return this.db.doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.userEmail,
