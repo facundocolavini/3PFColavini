@@ -11,14 +11,12 @@ export class NavbarComponent implements OnInit {
   public role: any;
   constructor(private authService: AuthService) { }
 
-  public userStatus = this.authService.userStatus;
-
   ngOnInit() {
-    this.authService.userStatusChanges.subscribe(x => console.log(this.userStatus = x))
    this.authService.getUserState().subscribe(u => {
+    console.log(u)
     this.user = u;
   })
-  console.log(this.userStatus)
+
   }
   
   logOutUser(): void {

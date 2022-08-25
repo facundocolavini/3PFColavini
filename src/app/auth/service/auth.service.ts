@@ -45,9 +45,8 @@ export class AuthService {
     console.log(user,'SINGUP')
     return this.afAuth.createUserWithEmailAndPassword(user.userEmail, user.userPassword)
       .then((result)=>{
-        this.userCreatedSuccesfull()
         result.user?.updateProfile({
-          displayName: user.userName + user.userLastName ,
+          displayName: user.userName + ' ' + user.userLastName ,
         })
         result.user?.sendEmailVerification();
       })
@@ -61,7 +60,6 @@ export class AuthService {
   login(email:string, password:string){
     return this.afAuth.signInWithEmailAndPassword(email, password)
     .then((result)=>{
-      this.userLogedSuccesfull();
       this.router.navigate(['/dashboard']);
     })
     .catch(error => {
@@ -82,16 +80,6 @@ export class AuthService {
     })
   }
 
-
-  userCreatedSuccesfull(){
-    this.snackbar.open('Registro completado con exito','OK', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      panelClass: ['green-snackbar', 'add-snackbar'],
-      verticalPosition: 'bottom',
-    })
-  }
-  
   userExistSnackbar(){
     this.snackbar.open('El usuario ya existe','', {
       duration: 3000,

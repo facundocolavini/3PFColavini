@@ -42,25 +42,22 @@ export class SingupComponent implements OnInit {
     if(this.singUpForm.invalid){
       return;
     }
-this.authService.singup(this.singUpForm.value)
-  .then((result)=>{
-    if(result == null){
-        this.router.navigate(['/register/login']);
-    }else if(result.isValid == false){
-      this.firebaseErrorMessage = result.message;
-    }
-  }).catch(() => {});
-    // let user = this.singUpForm.value
-   
-    // if(this.singUpForm.valid){
-   
-    // this.authService.singup(user)
-   
-      // }
+    this.authService.singup(this.singUpForm.value)
+      .then((result)=>{
+        if(result == null){
+          this.userCreatedSuccesfull()
+            this.router.navigate(['/register/login']);
+        }else if(result.isValid == false){
+          this.firebaseErrorMessage =  result.message.replace('Firebase:', '').split('(')[0]
+          this.userInValid(this.firebaseErrorMessage)
+        }
+      }).catch(() => {
+        
+      });
   }
 
-  userInValid(){
-    this.snackbar.open('Los campos ingresados no son validos','', {
+  userInValid(message: string){
+    this.snackbar.open(message,'desaparecer', {
       duration: 3000,
       horizontalPosition: 'right',
       panelClass: ['red-snackbar','error-snackbar'],
@@ -68,14 +65,15 @@ this.authService.singup(this.singUpForm.value)
     })
 
   }
-  userExistSnackbar(){
-    this.snackbar.open('El usuario ya existe','', {
+  userCreatedSuccesfull(){
+    this.snackbar.open('Registro completado con exito','OK', {
       duration: 3000,
       horizontalPosition: 'right',
+      panelClass: ['green-snackbar', 'add-snackbar'],
       verticalPosition: 'bottom',
-      
     })
   }
+
 
   showSnackbar(){
     this.snackbar.open('Los datos no son correctos','', {
