@@ -29,25 +29,26 @@ export class AuthService {
     this.userLoggedIn = false;
     this.afAuth.onAuthStateChanged((user)=>{
         if(user){
+          this.currentUser = user;
           this.userLoggedIn = true;  
         }else{
           this.userLoggedIn = false;
         }
     })
    }
-
+  
   getUserState(){
     return  this.afAuth.authState
   }
 
   singup(user: any): Promise<any>{
-    console.log(user,'SINGUP')
     return this.afAuth.createUserWithEmailAndPassword(user.userEmail, user.userPassword)
       .then((result)=>{
         result.user?.updateProfile({
           displayName: user.userName + ' ' + user.userLastName ,
         })
-        /* this.inserUserData(result) */
+        this.newUser =result.user;
+        this.insertUserDataToDb(result.user,user).catch(error => {      return { isValid: false, message: error.message}})
         result.user?.sendEmailVerification();
       })
       .catch(error => {
@@ -69,13 +70,21 @@ export class AuthService {
     }); 
   }
 
-  inserUserData(userCredential: any){
-    return this.db.doc(`Users/${userCredential.user.uid}`).set({
-      email: this.newUser.userEmail,
-      firstname: this.newUser.userName,
-      lastname: this.newUser.userLastName,
+  insertUserDataToDb(userCredential: any,userFormdata: any):Promise<any>{
+    console.log(userCredential.displayName,'USER')
+    let data = {
+      firstname: userFormdata.userName,
+      lastname: userFormdata.userLastName,
+      email: userFormdata.userEmail,
       role: {user:true}
-    })
+    }
+    return this.db.doc(`Users/${userCredential.uid}`).set(data)
+
+  }
+  
+  getUserById(id:any){
+    return this.db.collection<any>('Users').doc(id).snapshotChanges().pipe(
+      map(action =>action.payload.data()))
   }
 
   getRoles(userCredential: any){

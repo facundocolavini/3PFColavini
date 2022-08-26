@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/auth/service/auth.service';
 import { Menu } from 'src/app/interfaces/menu';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -9,15 +10,27 @@ import { MenuService } from 'src/app/services/menu.service';
 })
 export class SidenavComponent implements OnInit {
   opened: boolean = false;
+  public role: any;
   public menuItems: Menu[]=[];
-  constructor(private $menuService: MenuService) { }
+  constructor(private $menuService: MenuService, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.loadMenu();
+  
+ 
   }
   loadMenu(){
-    this.$menuService.getSideNavMenuOptions().subscribe((options) => {
-      this.menuItems = options
+    this.authService.role?.admin ? this.role = true : this.role = false;
+    this.authService.getUserById(this.authService.currentUser?.uid).subscribe(user => {
+      this.$menuService.getSideNavMenuOptions().subscribe((options) => {
+        if(user.role?.user){
+          this.menuItems = options.filter(menu => menu.auth?.user ===  true ) 
+        
+        }else if(user.role?.admin){
+          this.menuItems = options
+        }
+      })
     })
+   
   }
 }

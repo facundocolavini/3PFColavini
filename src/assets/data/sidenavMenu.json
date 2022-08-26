@@ -2,16 +2,19 @@
   {
     "name": "Estudiantes",
     "redirect": "/dashboard/students",
-    "icon": "school"
+    "icon": "school",
+    "auth": { "admin": true, "user": true }
   },
   {
     "name": "Cursos",
     "redirect": "/dashboard/courses",
-    "icon": "list"
+    "icon": "list",
+    "auth": { "admin": true, "user": true }
   },
   {
     "name": "Inscriptos",
     "redirect": "/dashboard/inscriptions",
-    "icon": "checklist"
+    "icon": "checklist",
+    "auth": { "admin": true, "user": false }
   }
 ]

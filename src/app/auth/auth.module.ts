@@ -17,7 +17,6 @@ import { ProfileComponent } from './pages/profile/profile.component';
     CommonModule,
     AuthRoutingModule,
     SharedModule,
-
   ],
 
 })

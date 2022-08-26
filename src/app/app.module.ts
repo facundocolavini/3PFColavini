@@ -14,6 +14,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './public/not-found/not-found.component';
+import { AuthModule } from './auth/auth.module';
 
 
 
@@ -31,7 +32,7 @@ import { NotFoundComponent } from './public/not-found/not-found.component';
     SharedModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
