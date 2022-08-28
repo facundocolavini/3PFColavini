@@ -1,20 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-/* import { AddStudentsComponent } from './components/add-students/add-students.component';
-import { DetailsStudentComponent } from './components/details-student/details-student.component';
-import { EditStudentComponent } from './components/edit-student/edit-student.component';
-import { StudentsComponent } from './students.component'; */
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { DetailsUserComponent } from './components/details-user/details-user.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { UsersComponent } from './users.component';
 
-/* const routes: Routes = [
+
+const routes: Routes = [
   {path: '',
-  component:StudentsComponent},
-  {path:'create', component: AddStudentsComponent},
-  {path:'edit/:id', component: EditStudentComponent},
-  {path:'details/student/:id', component: DetailsStudentComponent}
+  component:UsersComponent},
+  {path:'create', component: AddUserComponent},
+  {path:'edit/:id', component: EditUserComponent},
+  {path:'details/user/:id', component: DetailsUserComponent}
   
-]; */
+];
 
-const routes: Routes = [];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

@@ -18,6 +18,9 @@ import { NavbarComponent } from 'src/app/public/navbar/navbar.component';
 import { InscriptionsComponent } from 'src/app/features-modules/inscriptions/inscriptions.component';
 import { HomeComponent } from 'src/app/public/home/home.component';
 
+import { UsersComponent } from '../users/users.component';
+import { UsersModule } from '../users/users.module';
+
 
 
 

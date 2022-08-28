@@ -20,7 +20,7 @@
   {
     "name": "Usuarios",
     "redirect": "/dashboard/users",
-    "icon": "groupicon",
-    "auth": { "admin": true, "user": false }
+    "icon": "peoplealticon",
+    "auth": { "admin": true, "user": true }
   }
 ]

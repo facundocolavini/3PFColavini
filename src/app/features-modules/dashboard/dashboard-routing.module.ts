@@ -17,6 +17,7 @@ const routes: Routes = [
       {path:'' ,component:HomeComponent},
       {path:'students',loadChildren: ()=> import('../../features-modules/students/students.module').then(m => m.StudentsModule)},
       {path:'courses',loadChildren: ()=> import('../../features-modules/courses/courses.module').then(m => m.CoursesModule)},
+      {path:'users',loadChildren: ()=> import('../../features-modules/users/users.module').then(m => m.UsersModule)},
       {path:'inscriptions', component:InscriptionsComponent},
     ]
   },

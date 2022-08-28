@@ -41,6 +41,11 @@ export class AuthService {
   getUserState(){
     return  this.afAuth.authState
   }
+  deleteUser (){
+    this.afAuth.onAuthStateChanged((user)=>{ user?.delete().then((u)=>{console.log(u,"user deleted")})}).catch(error => {console.log("error deleting user")})
+
+  }
+
 
   singup(user: any): Promise<any>{
     return this.afAuth.createUserWithEmailAndPassword(user.userEmail, user.userPassword)
@@ -77,7 +82,7 @@ export class AuthService {
       firstname: userFormdata.userName,
       lastname: userFormdata.userLastName,
       email: userFormdata.userEmail,
-      role: {user:true}
+      role: {admin:true}
     }
     return this.db.doc(`Users/${userCredential.uid}`).set(data)
 
