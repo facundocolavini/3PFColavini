@@ -40,6 +40,7 @@ export class CoursesComponent implements OnInit {
       if(this.isAdmin === true) {
         this.displayedColumns = ['name', 'teacher', 'startDate', 'actions'];
       }else{
+        this.displayedColumns = this.displayedColumns.filter(c => c !== 'actions')
       }
     });
    
