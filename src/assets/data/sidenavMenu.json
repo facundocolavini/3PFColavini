@@ -9,12 +9,18 @@
     "name": "Cursos",
     "redirect": "/dashboard/courses",
     "icon": "list",
-    "auth": { "admin": true, "user": true }
+    "auth": { "admin": true, "user": false }
   },
   {
     "name": "Inscriptos",
     "redirect": "/dashboard/inscriptions",
     "icon": "checklist",
     "auth": { "admin": true, "user": false }
+  },
+  {
+    "name": "Salir",
+    "redirect": "/register/login",
+    "icon": "logout",
+    "auth": { "admin": true, "user": true }
   }
 ]
