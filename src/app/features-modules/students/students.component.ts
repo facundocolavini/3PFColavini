@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/service/auth.service';
 import { StudentI } from 'src/app/interfaces/student';
 import { StudentsService } from 'src/app/services/students.service';
 
@@ -17,7 +18,7 @@ export class StudentsComponent implements OnInit {
 
 
   public listStudents: Array<StudentI> = new Array<StudentI>();
-
+  public isAdmin: boolean = false;
   displayedColumns: string[] = ['email', 'name', 'lastname', 'sex','actions'];
   public studentId: string | null = null;
   public dataSource :any;
@@ -27,12 +28,23 @@ export class StudentsComponent implements OnInit {
   constructor(
     private router: Router,
     private _studentsService: StudentsService,
+    private authService: AuthService,
     public activedRoute: ActivatedRoute,
     private snackbar: MatSnackBar) { }
 
 
 
   ngOnInit(){
+    this.authService.getRoles().then((roles: boolean) =>{
+      this.isAdmin = roles;
+      if(this.isAdmin === true) {
+        this.displayedColumns = ['email', 'name', 'lastname', 'sex','actions'];
+      }else{
+       
+        this.displayedColumns = this.displayedColumns.filter(c => c !== 'actions')
+      }
+    });
+
     this._studentsService.getAllStudents().subscribe(students => {
       this.listStudents = students;
       this.dataSource = new MatTableDataSource(this.listStudents)

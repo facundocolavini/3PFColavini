@@ -35,17 +35,14 @@ export class CoursesComponent implements OnInit {
     private snackbar: MatSnackBar) { }
     
   ngOnInit(){
-    this.authService.getRoles();
-    this.isAdmin = this.authService.isAdmin;
-    console.log(this.isAdmin)
-    console.log()
-
-    if(this.isAdmin) {
-      this.displayedColumns = ['name', 'teacher', 'startDate', 'actions'];
-    }else{
-     
-      this.displayedColumns = this.displayedColumns.filter(c => c !== 'actions')
-    }
+    this.authService.getRoles().then((roles: boolean) =>{
+      this.isAdmin = roles;
+      if(this.isAdmin === true) {
+        this.displayedColumns = ['name', 'teacher', 'startDate', 'actions'];
+      }else{
+      }
+    });
+   
     this._coursesService.getAllCourses().subscribe(courses => {
       this.listCourses = courses;
       this.dataSource = new MatTableDataSource(courses)

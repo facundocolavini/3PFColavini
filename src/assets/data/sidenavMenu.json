@@ -22,11 +22,5 @@
     "redirect": "/dashboard/users",
     "icon": "groupicon",
     "auth": { "admin": true, "user": false }
-  },
-  {
-    "name": "Salir",
-    "redirect": "/register/login",
-    "icon": "logout",
-    "auth": { "admin": true, "user": true }
   }
 ]

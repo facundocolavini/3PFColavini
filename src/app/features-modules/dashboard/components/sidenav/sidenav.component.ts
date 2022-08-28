@@ -31,6 +31,9 @@ export class SidenavComponent implements OnInit {
         }
       })
     })
-   
+  }
+
+  logOutUser(): void {
+    this.authService.logout();
   }
 }

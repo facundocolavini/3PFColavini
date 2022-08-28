@@ -8,6 +8,12 @@
                 <span>{{item.name}}</span>
             </button>
         </div>
+        <button class="btn-icon" (click)="logOutUser()" mat-icon-button [routerLink]="'/register/login'">
+            <span class="material-icons" style="width:35px;">
+                logout
+            </span>
+            <span>Cerrar Sesión</span>
+        </button>
     </mat-drawer>
     <mat-drawer-content><router-outlet></router-outlet></mat-drawer-content>
   </mat-drawer-container>

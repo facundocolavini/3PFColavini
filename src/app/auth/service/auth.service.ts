@@ -88,14 +88,17 @@ export class AuthService {
       map(action =>action.payload.data()))
   }
 
-  getRoles() {
-    this.afAuth.onAuthStateChanged((user)=>{
-      this.getUserById(user?.uid).subscribe((u) =>{ 
-        if(u?.role?.admin === true){
-          this.isAdmin = true;
-        }else{
-          this.isAdmin = false;
-        }
+  getRoles(): Promise<any>{ 
+    return new Promise((resolve,reject) =>{
+      this.afAuth.onAuthStateChanged((user)=>{
+        this.getUserById(user?.uid).subscribe((u) =>{ 
+          if(u?.role?.admin){
+            resolve(true);
+          }else{
+            resolve(false);
+            reject()
+          }
+        })
       })
     })
   }
