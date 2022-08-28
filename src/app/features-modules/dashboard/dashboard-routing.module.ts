@@ -17,7 +17,7 @@ const routes: Routes = [
       {path:'' ,component:HomeComponent},
       {path:'students',loadChildren: ()=> import('../../features-modules/students/students.module').then(m => m.StudentsModule)},
       {path:'courses',loadChildren: ()=> import('../../features-modules/courses/courses.module').then(m => m.CoursesModule)},
-      {path:'inscriptions',canActivate:[RoleGuard],component:InscriptionsComponent},
+      {path:'inscriptions',component:InscriptionsComponent},
     ]
   },
   /* {path:'students', loadChildren:(()=> import('./components/students/students.module').then(m => m.StudentsModule))}, */

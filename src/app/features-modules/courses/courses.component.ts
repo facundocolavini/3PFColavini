@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource, _MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/service/auth.service';
 import { CoursesI } from 'src/app/interfaces/courses';
 
 import { CoursesService } from 'src/app/services/courses.service';
@@ -19,20 +20,32 @@ export class CoursesComponent implements OnInit {
 
   public listCourses: Array<CoursesI> = new Array<CoursesI>();
 
-  displayedColumns: string[] = ['name', 'teacher', 'startDate', 'actions'];
+  public isAdmin: boolean = false;
+  displayedColumns: string[]  =  ['name', 'teacher', 'startDate', 'actions'];
   public dataSource :any;
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
     private router: Router,
     private _coursesService: CoursesService,
+    private authService: AuthService,
     public activedRoute: ActivatedRoute,
     private snackbar: MatSnackBar) { }
-
-
-
+    
   ngOnInit(){
+    this.authService.getRoles();
+    this.isAdmin = this.authService.isAdmin;
+    console.log(this.isAdmin)
+    console.log()
+
+    if(this.isAdmin) {
+      this.displayedColumns = ['name', 'teacher', 'startDate', 'actions'];
+    }else{
+     
+      this.displayedColumns = this.displayedColumns.filter(c => c !== 'actions')
+    }
     this._coursesService.getAllCourses().subscribe(courses => {
       this.listCourses = courses;
       this.dataSource = new MatTableDataSource(courses)

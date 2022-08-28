@@ -1,6 +1,6 @@
 [
   {
-    "name": "Estudiantes",
+    "name": "Alumnos",
     "redirect": "/dashboard/students",
     "icon": "school",
     "auth": { "admin": true, "user": true }
@@ -9,12 +9,18 @@
     "name": "Cursos",
     "redirect": "/dashboard/courses",
     "icon": "list",
-    "auth": { "admin": true, "user": false }
+    "auth": { "admin": true, "user": true }
   },
   {
     "name": "Inscriptos",
     "redirect": "/dashboard/inscriptions",
     "icon": "checklist",
+    "auth": { "admin": true, "user": true }
+  },
+  {
+    "name": "Usuarios",
+    "redirect": "/dashboard/users",
+    "icon": "groupicon",
     "auth": { "admin": true, "user": false }
   },
   {

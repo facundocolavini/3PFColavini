@@ -48,8 +48,6 @@ export class AddCourseComponent implements OnInit {
       verticalPosition: 'bottom',
       });
   }
-  
-
 
   goBack(){
     this.router.navigate(['/dashboard/courses'])

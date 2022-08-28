@@ -15,6 +15,7 @@ export class AuthService {
   public userStatus:any = {} ;
   public userStatusChanges: BehaviorSubject<any> = new BehaviorSubject(this.userStatus);
   public role: any;
+  public isAdmin: boolean = false;
 
   setUserStatus(userStatus: any):void{
     this.userStatus = userStatus;
@@ -87,8 +88,16 @@ export class AuthService {
       map(action =>action.payload.data()))
   }
 
-  getRoles(userCredential: any){
-    this.db.doc(`Users/${userCredential.user.uid}`).get()
+  getRoles() {
+    this.afAuth.onAuthStateChanged((user)=>{
+      this.getUserById(user?.uid).subscribe((u) =>{ 
+        if(u?.role?.admin === true){
+          this.isAdmin = true;
+        }else{
+          this.isAdmin = false;
+        }
+      })
+    })
   }
 
   logout(){
