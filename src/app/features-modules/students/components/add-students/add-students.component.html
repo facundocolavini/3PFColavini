@@ -41,8 +41,8 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                     <mat-form-field class="w">
                         <mat-label>Curso</mat-label>
-                        <mat-select  formControlName="courses">
-                          <mat-option *ngFor="let item of sex" [value]="item">
+                        <mat-select  formControlName="courseSelected">
+                          <mat-option *ngFor="let item of courses" [value]="item">
                             {{item}}
                           </mat-option>
                         </mat-select>

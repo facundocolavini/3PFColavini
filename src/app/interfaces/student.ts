@@ -4,4 +4,6 @@ export interface StudentI {
     name: string;
     lastname: string;
     sex: string;
+    courseSelected?: string;
+    courses?: Array<String>
 }

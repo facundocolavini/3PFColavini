@@ -8,13 +8,15 @@
         <mat-grid-list *ngIf="student" cols="2" rowHeight="340px">
             <mat-grid-tile  >
                 <mat-list class="list" >
-                    <mat-list-item>{{student?.name}}</mat-list-item>
+                    <mat-list-item><span class="label-detail">Nombre:</span>{{student?.name}}</mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>{{student?.lastname}}</mat-list-item>
+                    <mat-list-item><span class="label-detail">Apellido:</span>{{student?.lastname}}</mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>{{student?.email}}</mat-list-item>
+                    <mat-list-item><span class="label-detail">Email:</span>{{student?.email}}</mat-list-item>
                     <mat-divider></mat-divider>
-                    <mat-list-item>{{student?.sex}}</mat-list-item>
+                    <mat-list-item><span class="label-detail">Sexo:</span>{{student?.sex}}</mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item><span class="label-detail">Curso:</span>{{student?.courses}}</mat-list-item>
                 </mat-list>
             </mat-grid-tile>
             <mat-grid-tile><img src="./assets/img/user.png" alt="user" width="250px" height="250px"></mat-grid-tile>

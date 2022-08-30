@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/service/auth.service';
 import { StudentI } from 'src/app/interfaces/student';
+import { CoursesService } from 'src/app/services/courses.service';
 import { StudentsService } from 'src/app/services/students.service';
 
 @Component({
@@ -14,10 +16,15 @@ import { StudentsService } from 'src/app/services/students.service';
 
 export class AddStudentsComponent implements OnInit {
   sex: any[] = ['Masculino','Femenino'];
+  public idUser: string = this.authService.currentUser.uid;
+  public myCourses  = [];
   public form: FormGroup;
+  public courses = [];
   constructor(
     private fb: FormBuilder,
     private studentService: StudentsService,
+    private authService: AuthService,
+    private coursesService: CoursesService,
     private router: Router,
     private snackbar: MatSnackBar
   ) { 
@@ -25,8 +32,8 @@ export class AddStudentsComponent implements OnInit {
       email: ['', Validators.required],
       name: ['', Validators.required],
       lastname: ['', Validators.required],
-      courses: ['', Validators.required],
-      sex: ['', Validators.required]
+      sex: ['', Validators.required],
+      courseSelected: ['', Validators.required]
     })
   }
   openSuccessSnackBar(){
@@ -49,7 +56,13 @@ openFailureSnackBar(){
 }
   
   ngOnInit(): void {
-   
+    this.coursesService.getAllCourses().subscribe(courses => {
+      this.courses = courses.map((c: any) =>{
+       return c.name;
+      })
+      console.log(this.courses)
+
+    });
   }
 
   goBack(){
@@ -61,10 +74,15 @@ openFailureSnackBar(){
         name: this.form.value.name,
         lastname: this.form.value.lastname,
         sex: this.form.value.sex,
+        courseSelected: this.form.value.courseSelected
       }
+
+      /* this.myCourses.push(student.courseSelected) */
+      console.log(this.myCourses,'AA')
       this.studentService.addStudent(student).then(() =>{
         this.openSuccessSnackBar()
-        this.router.navigate(['/dashboard/students'])
+         this.router.navigate(['/dashboard/students'])
+
        /*  this.snackbar.open('Estudiante agregado con exito','desaparecer', {
           duration: 2400,
           horizontalPosition: 'right',
